@@ -24,12 +24,9 @@ uci_bool_by_name() {
 add_hotplug() {
 	cat <<EOF > "/etc/hotplug.d/iface/${START}-${NAME}"
 #!/bin/sh /etc/rc.common
-
 [ "Z\$ACTION" = "Zifup" -a "Z\$INTERFACE" = "Zwan" ] || exit 0
-
 DATE=\$(date +'%Y-%m-%d %H:%M:%S')
 ( sleep 10 && ( echo "\$DATE IFUP-WAN" && /usr/sbin/aliddns ) >> /var/log/aliddns.log 2>&1 ) &
-
 exit 0
 EOF
 	chmod +x "/etc/hotplug.d/iface/${START}-${NAME}"
